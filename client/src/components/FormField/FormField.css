@@ -1,0 +1,42 @@
+.formField {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+
+.formField__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.formField__errorText {
+  color: var(--error);
+  font-size: 12px;
+}
+
+.formField > input,
+.formField > textarea {
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+}
+
+.formField:focus-within > input,
+.formField:focus-within > textarea {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.formField:focus-within > .formField__label {
+  color: var(--text-primary);
+}
+
+.formField > input:invalid,
+.formField > textarea:invalid {
+  border-color: var(--error);
+}

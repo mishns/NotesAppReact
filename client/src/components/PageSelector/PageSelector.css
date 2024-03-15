@@ -1,0 +1,26 @@
+.pageSelector {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.pageSelector__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border-radius: 50%;
+  border: 0;
+  color: white;
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+.pageSelector__button:disabled {
+  opacity: 0;
+}
+
+.pageSelector__page {
+  fontSize: 16px;
+  font-weight: 600;
+}
