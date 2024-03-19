@@ -8,21 +8,6 @@ export const NotesListView = () => {
       <li>
         <NoteView />
       </li>
-      <li>
-        <NoteView />
-      </li>
-      <li>
-        <NoteView />
-      </li>
-      <li>
-        <NoteView />
-      </li>
-      <li>
-        <NoteView />
-      </li>
-      <li>
-        <NoteView />
-      </li>
     </ul>
   );
 };

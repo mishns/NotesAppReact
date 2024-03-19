@@ -1,11 +1,11 @@
-import React, { FormEventHandler } from "react";
+import React from "react";
 import styles from "./LoginForm.css";
 import { FormField } from "../FormField";
 import { Button } from "../Button";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "@api/queryClient";
-import { login } from "@api/User";
+import { invalidateMe, login } from "@api/User";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "@components/Loader";
@@ -21,6 +21,7 @@ export const LoginForm = () => {
     {
       mutationFn: ({ email, password }: { email: string; password: string }) =>
         login(email, password),
+      onSuccess: invalidateMe,
     },
     queryClient,
   );
