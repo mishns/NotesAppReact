@@ -1,7 +1,7 @@
 import { default as React, FC } from "react";
 import styles from "./PageSelector.css";
 
-interface IPageSelectorProps {
+interface PageSelectorProps {
   currentPage: number;
   canSelectNext: boolean;
   canSelectPrev: boolean;
@@ -9,7 +9,7 @@ interface IPageSelectorProps {
   onPrevClick: () => void;
 }
 
-export const PageSelector: FC<IPageSelectorProps> = ({
+export const PageSelector: FC<PageSelectorProps> = ({
   currentPage,
   onNextClick,
   onPrevClick,

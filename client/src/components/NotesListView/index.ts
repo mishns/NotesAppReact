@@ -1,1 +1,1 @@
-export * from "./NotesListView";
+export * from "./NoteListView";

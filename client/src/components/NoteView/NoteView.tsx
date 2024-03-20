@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./NoteView.css";
+import { NoteData } from "@api/Note";
 
 const formatDate = (timestamp: number) => {
   const date = new Date(timestamp);
@@ -12,17 +13,21 @@ const formatDate = (timestamp: number) => {
   });
 };
 
-export const NoteView = () => {
+interface NoteViewProps {
+  noteData: NoteData;
+}
+
+export const NoteView = ({ noteData }: NoteViewProps) => {
   return (
     <div className={styles.noteView}>
       <div className={styles.noteView__head}>
-        <p className={styles.noteView__datetime}>{formatDate(Date.now())}</p>
-        <p className={styles.noteView__title}>Заголовок</p>
+        <p className={styles.noteView__datetime}>
+          {formatDate(noteData.createdAt)}
+        </p>
+        <p className={styles.noteView__title}>{noteData.title}</p>
       </div>
 
-      <p className={styles.noteView__text}>
-        {`Какой-то очень большой текст`.repeat(10)}
-      </p>
+      <p className={styles.noteView__text}>{noteData.text}</p>
     </div>
   );
 };
