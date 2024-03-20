@@ -12,9 +12,6 @@ function renderSwitch(query: UseQueryResult) {
     case "pending":
       return <Loader />;
     case "error": {
-      console.log("CONTENT error");
-      console.log(query.error);
-
       return <AuthForm />;
     }
     case "success":

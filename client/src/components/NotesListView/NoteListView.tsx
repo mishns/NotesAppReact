@@ -4,6 +4,7 @@ import { NoteView } from "../NoteView";
 import { NoteListResponse } from "@api/Note";
 import { Button } from "@components/Button";
 import { logout } from "@api/User";
+import { NoteForm } from "@components/NoteForm";
 
 interface NoteListViewProps {
   noteListResponse: NoteListResponse;
@@ -12,6 +13,7 @@ interface NoteListViewProps {
 export const NoteListView = ({ noteListResponse }: NoteListViewProps) => {
   return (
     <>
+      <NoteForm />
       <ul className={styles.noteListView}>
         {noteListResponse.list.map(noteData => (
           <li key={noteData.id}>
