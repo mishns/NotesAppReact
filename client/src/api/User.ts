@@ -1,5 +1,6 @@
+import { queryClient } from "@api/queryClient";
 import { validateResponse } from "@api/validateResponse";
-import { API_URL, REFERRER_POLICY } from "@constants";
+import { API_URL, DEV_COOKIES_HEADERS } from "@constants";
 import { z } from "zod";
 
 export const MeSchema = z.object({
@@ -10,9 +11,10 @@ export const MeSchema = z.object({
 export type Me = z.infer<typeof MeSchema>;
 
 export function fetchMe(): Promise<Me> {
-  return fetch(`${API_URL}/users/me`).then(response =>
-    validateResponse(response).then(data => MeSchema.parse(data)),
-  );
+  return fetch(`${API_URL}/users/me`, DEV_COOKIES_HEADERS)
+    .then(validateResponse)
+    .then(response => response.json())
+    .then(data => MeSchema.parse(data));
 }
 
 export function registerUser(
@@ -32,9 +34,7 @@ export function registerUser(
     }),
   })
     .then(validateResponse)
-    .then(() => {
-      undefined;
-    });
+    .then(() => undefined);
 }
 
 export function login(email: string, password: string): Promise<void> {
@@ -47,18 +47,24 @@ export function login(email: string, password: string): Promise<void> {
       email,
       password,
     }),
-    credentials: "include",
-    mode: "cors",
-    referrerPolicy: REFERRER_POLICY,
+    ...DEV_COOKIES_HEADERS,
   })
     .then(validateResponse)
-    .then(() => {
-      undefined;
-    });
+    .then(() => undefined);
 }
 
 export function logout(): Promise<void> {
-  return fetch(`${API_URL}/logout`).then(() => {
-    undefined;
-  });
+  return fetch(`${API_URL}/logout`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    ...DEV_COOKIES_HEADERS,
+  })
+    .then(invalidateMe)
+    .then(() => undefined);
+}
+
+export function invalidateMe(): void {
+  queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+  queryClient.invalidateQueries({ queryKey: ["notes"] });
 }

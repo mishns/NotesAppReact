@@ -23,6 +23,7 @@ export const LoginForm = () => {
         login(email, password),
       onSuccess: invalidateMe,
       onError: () => resetForm(),
+      retry: false,
     },
     queryClient,
   );

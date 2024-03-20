@@ -24,6 +24,7 @@ export const Content: FC = () => {
     {
       queryFn: fetchMe,
       queryKey: ["users", "me"],
+      retry: false,
     },
     queryClient,
   );

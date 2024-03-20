@@ -11,6 +11,7 @@ export const FetchNoteListView: FC = () => {
     {
       queryFn: fetchNoteList,
       queryKey: ["notes"],
+      retry: false,
     },
     queryClient,
   );

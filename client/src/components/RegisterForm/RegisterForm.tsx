@@ -30,6 +30,7 @@ export const RegisterForm: FC = () => {
         password: string;
       }) => registerUser(username, email, password),
       onError: () => resetForm(),
+      retry: false,
     },
     queryClient,
   );

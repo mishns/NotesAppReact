@@ -15,7 +15,6 @@ export const Button: FC<IButtonProps> = ({
   isLoading,
   isDisabled = isLoading,
   children,
-  className,
   kind = "primary",
   type,
   ...props
