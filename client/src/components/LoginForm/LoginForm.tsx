@@ -12,7 +12,7 @@ import { Loader } from "@components/Loader";
 
 const loginFormSchema = z.object({
   email: z.string().email("Неверный формат email"),
-  password: z.string().min(8, "Пароль не может быть короче пяти символов"),
+  password: z.string().min(5, "Пароль не может быть короче пяти символов"),
 });
 type LoginFormT = z.infer<typeof loginFormSchema>;
 
@@ -22,6 +22,7 @@ export const LoginForm = () => {
       mutationFn: ({ email, password }: { email: string; password: string }) =>
         login(email, password),
       onSuccess: invalidateMe,
+      onError: () => resetForm(),
     },
     queryClient,
   );
@@ -30,6 +31,7 @@ export const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset: resetForm,
   } = useForm<LoginFormT>({
     resolver: zodResolver(loginFormSchema),
   });

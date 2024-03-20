@@ -29,6 +29,7 @@ export const RegisterForm: FC = () => {
         email: string;
         password: string;
       }) => registerUser(username, email, password),
+      onError: () => resetForm(),
     },
     queryClient,
   );
@@ -37,6 +38,7 @@ export const RegisterForm: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset: resetForm,
   } = useForm<RegisterFormT>({
     resolver: zodResolver(registerFormShema),
   });

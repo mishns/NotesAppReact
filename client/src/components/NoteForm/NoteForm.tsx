@@ -13,6 +13,7 @@ export const NoteForm = () => {
     {
       mutationFn: ({ title, text }: NewNote) => createNote(title, text),
       onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notes"] }),
+      onError: () => resetForm(),
     },
     queryClient,
   );
@@ -21,6 +22,7 @@ export const NoteForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset: resetForm,
   } = useForm<NewNote>({
     resolver: zodResolver(newNoteSchema),
   });
@@ -38,7 +40,7 @@ export const NoteForm = () => {
       <FormField label="Текст" errorMessage={errors.text?.message}>
         <textarea {...register("text")} />
       </FormField>
-      <Button>Сохранить</Button>
+      <Button isLoading={noteMutation.isPending}>Сохранить</Button>
       {noteMutation.error && <span>{noteMutation.error.message}</span>}
     </form>
   );
