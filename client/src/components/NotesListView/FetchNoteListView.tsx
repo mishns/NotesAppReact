@@ -10,7 +10,7 @@ export const FetchNoteListView: FC = () => {
   const noteListQuery = useQuery(
     {
       queryFn: fetchNoteList,
-      queryKey: ["posts"],
+      queryKey: ["notes"],
     },
     queryClient,
   );
