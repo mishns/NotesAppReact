@@ -1,7 +1,8 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === "development";
@@ -59,25 +60,19 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "/src/index.html",
+      template: "src/index.html",
       filename: "index.html",
     }),
     new ReactRefreshWebpackPlugin(),
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-    alias: {
-      "@constants": path.resolve(__dirname, "/src/constants.ts"),
-      "@fonts": path.resolve(__dirname, "/src/fonts"),
-      "@api": path.resolve(__dirname, "/src/api"),
-      "@components": path.resolve(__dirname, "/src/components"),
-      "@root": path.resolve(__dirname, "/"),
-    },
+    plugins: [new TsconfigPathsPlugin({})],
   },
   devServer: {
     hot: true,
     host: "127.0.0.1",
-    port: "8080"
+    port: "8080",
   },
   devtool: "source-map",
 };
